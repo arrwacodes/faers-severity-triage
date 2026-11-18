@@ -1,0 +1,6 @@
+{
+  "is_fatal": 0.5700000000000001,
+  "is_hospitalized": 0.49,
+  "is_life_threat": 0.4,
+  "is_disabling": 0.01
+}
