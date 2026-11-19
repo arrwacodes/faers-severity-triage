@@ -22,7 +22,7 @@ CATEGORICAL = ["suspect_drug", "brand_name", "manufacturer", "pharm_class", "dru
 
 
 class Predictor:
-        def __init__(self, artifacts_dir="artifacts"):
+    def __init__(self, artifacts_dir="artifacts"):
         d = Path(artifacts_dir)
         if not d.exists():                       # files were uploaded next to the code, not in artifacts/
             d = Path(__file__).resolve().parent
