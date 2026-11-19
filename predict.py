@@ -22,12 +22,14 @@ CATEGORICAL = ["suspect_drug", "brand_name", "manufacturer", "pharm_class", "dru
 
 
 class Predictor:
-    def __init__(self, artifacts_dir="artifacts"):
+        def __init__(self, artifacts_dir="artifacts"):
         d = Path(artifacts_dir)
+        if not d.exists():                       # files were uploaded next to the code, not in artifacts/
+            d = Path(__file__).resolve().parent
+        models_dir = d / "models" if (d / "models").exists() else d
         self.meta = json.loads((d / "metadata.json").read_text())
         self.thresholds = json.loads((d / "thresholds.json").read_text())
-        self.models = {t: joblib.load(d / "models" / f"{t}.joblib") for t in TARGETS}
-
+        self.models = {t: joblib.load(models_dir / f"{t}.joblib") for t in TARGETS}
     # ---------- input handling ----------
     def _drug_count_category(self, n):
         ranges = self.meta["drug_count_ranges"]
